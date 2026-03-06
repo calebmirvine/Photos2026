@@ -14,7 +14,7 @@ struct ContentView: View {
 	var body: some View {
 		NavigationStack {
 			List{
-				ForEach(photoLog, id: \.self){ photo in
+				ForEach(photoLog){ photo in //Take out id: \.self
 					NavigationLink {
 						DetailView(photo: photo)
 					} label: {

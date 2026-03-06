@@ -64,10 +64,26 @@ struct DetailView: View {
 						Image(systemName: "camera")
 					}
 				)
+				Button(
+					action: {
+						PHPhotoLibrary.requestAuthorization { status in
+							if UIImagePickerController
+								.isSourceTypeAvailable(.photoLibrary) {
+								self.imageSource = .photoLibrary
+								self.pickerVisible = true
+							} else {
+								self.showCameraAlert = true
+							}
+						}
+					},
+					label: {
+						Image(systemName: "book")
+					}
+				)
 			}
 		}
 		.alert(isPresented: $showCameraAlert) {
-			Alert(title: Text("Error"), message: Text("Camera not available"), dismissButton: .default(Text("OK")))
+			Alert(title: Text("Error"), message: Text("Photos from gallery & photos not available"), dismissButton: .default(Text("OK")))
 		}
 	}
 }
